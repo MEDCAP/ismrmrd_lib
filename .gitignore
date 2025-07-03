@@ -3,6 +3,7 @@
 *.so
 *.asv
 build/
+!/build/Debug
 .DS_Store
 .idea/
 .project
@@ -11,3 +12,4 @@ cmake/cpack_options.cmake
 .vscode/
 *.ipynb
 *.h5
+vcpkg_installed/

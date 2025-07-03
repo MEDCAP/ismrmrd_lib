@@ -14,5 +14,6 @@ endif()
 # but this is no longer necessary as the $(ISMRMRD_LIBRARIES} target
 # has this as a property.
 add_executable(ismrmrd_c_example main.c)
-target_link_libraries(ismrmrd_c_example ${ISMRMRD_LIBRARIES})
+# target_link_libraries(ismrmrd_c_example ${ISMRMRD_LIBRARIES})
+target_link_libraries(ismrmrd_c_example "C:/Users/kento/source/ismrmrd_lib/ismrmrd_lib/build/Debug/ismrmrd.lib")
 install(TARGETS ismrmrd_c_example DESTINATION bin)

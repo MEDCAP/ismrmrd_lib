@@ -19,8 +19,8 @@ set (ISMRMRD_CMAKE_DIR ${PROJECT_SOURCE_DIR}/cmake CACHE PATH
 
 # command line options
 option(USE_HDF5_DATASET_SUPPORT "Compile with support for reading and writing datasets to HDF5 files" ON)
-option(BUILD_TESTS "Build unit tests " ON)
-option(BUILD_UTILITIES "Build utilities tests " ON)
+option(BUILD_TESTS "Build unit tests " OFF)
+option(BUILD_UTILITIES "Build utilities tests " OFF)
 option(BUILD_EXAMPLES "Build examples tests " ON)
 # If defined, this will modify the build environment to use General Electric's Libraries,
 # which are needed to link against and use their SDK to open and process their raw data.
@@ -225,6 +225,9 @@ if (build4GE)
 endif ()
 
 # main library
+add_definitions(-Dismrmrd_STATIC)
+
+# add_library(ismrmrd STATIC ${ISMRMRD_TARGET_SOURCES})
 add_library(ismrmrd SHARED ${ISMRMRD_TARGET_SOURCES})
 target_include_directories(ismrmrd PUBLIC ${ISMRMRD_TARGET_INCLUDE_DIRS})
 if (USE_HDF5_DATASET_SUPPORT)
@@ -240,6 +243,7 @@ set_target_properties(ismrmrd
   PROPERTIES
   EXPORT_NAME ISMRMRD)
 
+message(target_link===${ISMRMRD_TARGET_LINK_LIBS})
 target_link_libraries(ismrmrd ${ISMRMRD_TARGET_LINK_LIBS})
 list(APPEND ISMRMRD_LIBRARIES ismrmrd) # Add to list of libraries to be found
 list(APPEND ISMRMRD_LIBRARY_DIRS ${CMAKE_BINARY_DIR} ) # Add to list of directories to find libraries
@@ -263,7 +267,7 @@ install(FILES schema/ismrmrd.xsd DESTINATION share/ismrmrd/schema COMPONENT Deve
 #  ---   Main Library  (end) ----
 
 # process subdirectories
-add_subdirectory(doc)
+# add_subdirectory(doc)
 
 if (BUILD_UTILITIES)
   add_subdirectory(utilities)
